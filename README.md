@@ -56,4 +56,10 @@ Fetching a resource from cloudinary is very simple and easy. Cloudinary store ev
 
 Below are the steps to setup cloudinary into your angular application. 
 * First acquire cloudinary via bower `bower install cloudinary_ng --save` and include the module in manifest file. Below are the files you will need to include, 
-  
+  ..* lodash/lodash.min
+  ..* cloudinary-core/cloudinary-core.min 
+  ..* cloudinary_ng/js/angular.cloudinary
+* Include the module into your app `angular.module('appName',[cloudinary])`
+* In your config block add this `cloudinaryProvider.set("cloud_name", cloud_name) ` , if you are using multi environments best to use with config.json.
+* Now you can simply use the built in directive provided by the lib `<cl-image public-id="{some_public_id}" class="thumbnail inline" angle="20" format="jpg">
+<cl-transformation height="150" width="150" crop="fill" gravity="north" effect="sepia" radius="20"/></cl-image>`
