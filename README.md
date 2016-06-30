@@ -101,7 +101,11 @@ progressall: function(e, data) {
 <input id="fileupload" type="file" class="upload" name="files[]" data-url="path_to_server" multiple>
 `
 * On that path post the file to cloudinary, below are some example
-  ..* `Cloudinary::Uploader.upload(url,:use_filename => true, :folder => folder_path)`
-  ..* `cloudinary.uploader.upload('my_image.jpg', function(result) { console.log(result) }, { public_id: "sample_id" });`
+  ```
+  For Rails
+  Cloudinary::Uploader.upload(url,:use_filename => true, :folder => folder_path)
+  For Node.js	
+  cloudinary.uploader.upload('my_image.jpg', function(result) { console.log(result) }, { public_id: "sample_id" });
+  ```	
 * Folder is the path where image will be stored for more structure on cloudinary admin interface, for this you will need to turn on option in user settings in cloudinary Settings located under upload section. 
 * Now store the public id or full information returned by cloudinary. 
