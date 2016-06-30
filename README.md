@@ -81,3 +81,27 @@ Below are the steps to setup cloudinary into your node.js application.
 	 api_secret: '' 
 	});`
 * Then you can use `cloudinary.url("sample.jpg", {width: 100, height: 150, crop: "fill"})`, you can get your resource. 
+### Retain Resource
+Unfortunately there is a limit on cloudinary admin api for free 500/hour and for paid subscription 2000/hour. For this reason, we will have to retain information of resource public_id on our end. So when retrieving resource, we are not hitting admin api to list down the number of resource in a given folder. So we can add a middle table which retain this information, for more dynamic solution we can add a polymorphic relationship. In next section we will see how we can upload a resource to server and then cloudinary.   
+### Upload Resource
+You can use number of given solution for uploading files to server but we will be using jquery file uploader because it's very convenient and well documented. Below are short steps to make it running. 
+* Include jquery file uploader files steps are given [here](https://blueimp.github.io/jQuery-File-Upload/).
+* Now create a http route in your application which will receive file or you can directly post files to cloudinary and then store the public in return but we will be doing the preceding approach. 
+* Below is short and basic snapshot of codebase. 
+`$('#fileupload').fileupload({
+dataType: 'json',
+progressall: function(e, data) {
+    var progress;
+    progress = parseInt(data.loaded / data.total * 100, 10);
+    $('#progress .bar').css('width', progress + '%');
+    return $('#progress .bar').text(progress + '%');
+    }
+ });
+
+<input id="fileupload" type="file" class="upload" name="files[]" data-url="path_to_server" multiple>
+`
+* On that path post the file to cloudinary, below are some example
+  ..* `Cloudinary::Uploader.upload(url,:use_filename => true, :folder => folder_path)`
+  ..* `cloudinary.uploader.upload('my_image.jpg', function(result) { console.log(result) }, { public_id: "sample_id" });`
+* Folder is the path where image will be stored for more structure on cloudinary admin interface, for this you will need to turn on option in user settings in cloudinary Settings located under upload section. 
+* Now store the public id or full information returned by cloudinary. 
