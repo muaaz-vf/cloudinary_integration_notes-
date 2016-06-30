@@ -63,3 +63,21 @@ Below are the steps to setup cloudinary into your angular application.
 * In your config block add this `cloudinaryProvider.set("cloud_name", cloud_name) ` , if you are using multi environments best to use with config.json.
 * Now you can simply use the built in directive provided by the lib `<cl-image public-id="{some_public_id}" class="thumbnail inline" angle="20" format="jpg">
 <cl-transformation height="150" width="150" crop="fill" gravity="north" effect="sepia" radius="20"/></cl-image>`
+
+#### Ruby On Rails
+ Below are the steps to setup cloudinary into your ruby on rails application. 
+* First install the corresponding gem `gem install cloudinary` .
+* Bundle install will automatically will create cloudinary.yml, you will just need to add credentials in that file. 
+* For rendering resource you can do as follows, `cl_image_tag("sample.jpg", :width => 100, :height => 150, :crop => :fill)`.
+
+#### Node.js
+Below are the steps to setup cloudinary into your node.js application.
+* First get the module `npm install cloudinary` .
+* Then acquire the module `var cloudinary = require('cloudinary');` .
+* Config the settings in your initialization block 
+`cloudinary.config({ 
+	cloud_name: '', 
+	api_key: '',
+	 api_secret: '' 
+	});`
+* Then you can use `cloudinary.url("sample.jpg", {width: 100, height: 150, crop: "fill"})`, you can get your resource. 
